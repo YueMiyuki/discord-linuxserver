@@ -3,46 +3,45 @@ const {
   ModalBuilder,
   TextInputBuilder,
   TextInputStyle,
-  SlashCommandBuilder,
-} = require("discord.js");
+  SlashCommandBuilder
+} = require('discord.js')
 
-const db = require("enhanced.db");
-const userLogin = new db.Table("user");
+const db = require('enhanced.db')
+const userLogin = new db.Table('user')
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("login")
-    .setDescription("Login to mDesk"),
+    .setName('login')
+    .setDescription('Login to mDesk'),
 
-  async execute(interaction) {
-    const userid = interaction.member.id;
+  async execute (interaction) {
+    const userid = interaction.member.id
 
-    if (userLogin.get(userid))
-      return interaction.reply("You are already logged in!");
+    if (userLogin.get(userid)) { return interaction.reply('You are already logged in!') }
 
     const modal = new ModalBuilder()
-      .setCustomId("mdesklogin")
-      .setTitle("Login to mDesk");
+      .setCustomId('mdesklogin')
+      .setTitle('Login to mDesk')
 
     const usernameInput = new TextInputBuilder()
       .setRequired(true)
-      .setCustomId("username")
-      .setLabel("mDesk login username:")
-      .setPlaceholder("Username")
-      .setStyle(TextInputStyle.Short);
+      .setCustomId('username')
+      .setLabel('mDesk login username:')
+      .setPlaceholder('Username')
+      .setStyle(TextInputStyle.Short)
 
     const pwdInput = new TextInputBuilder()
       .setRequired(true)
-      .setCustomId("pwd")
-      .setLabel("mDesk login password:")
-      .setPlaceholder("Password")
-      .setStyle(TextInputStyle.Short);
+      .setCustomId('pwd')
+      .setLabel('mDesk login password:')
+      .setPlaceholder('Password')
+      .setStyle(TextInputStyle.Short)
 
-    const firstActionRow = new ActionRowBuilder().addComponents(usernameInput);
-    const secondActionRow = new ActionRowBuilder().addComponents(pwdInput);
+    const firstActionRow = new ActionRowBuilder().addComponents(usernameInput)
+    const secondActionRow = new ActionRowBuilder().addComponents(pwdInput)
 
-    modal.addComponents(firstActionRow, secondActionRow);
+    modal.addComponents(firstActionRow, secondActionRow)
 
-    await interaction.showModal(modal);
-  },
-};
+    await interaction.showModal(modal)
+  }
+}

@@ -1,82 +1,82 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const si = require("systeminformation");
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
+const si = require('systeminformation')
 
-async function getData() {
+async function getData () {
   try {
     const getObject = {
-      cpu: "manufacturer, brand, speed",
-      osInfo: "platform, release",
-      mem: "total, free, used, cached",
-      dockerInfo: "containers, containersRunning",
-      currentLoad: "avgLoad, currentLoad",
-    };
+      cpu: 'manufacturer, brand, speed',
+      osInfo: 'platform, release',
+      mem: 'total, free, used, cached',
+      dockerInfo: 'containers, containersRunning',
+      currentLoad: 'avgLoad, currentLoad'
+    }
 
-    const data = await si.get(getObject);
-    return data;
+    const data = await si.get(getObject)
+    return data
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
 }
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("status")
-    .setDescription("Show server status"),
+    .setName('status')
+    .setDescription('Show server status'),
 
-  async execute(interaction) {
+  async execute (interaction) {
     getData().then((d) => {
-		// console.log(d.currentLoad.currentLoad)
-		const CLoad = Math.round(d.currentLoad.currentLoad);
-		const ALoad = Math.round(d.currentLoad.avgLoad);
+      // console.log(d.currentLoad.currentLoad)
+      const CLoad = Math.round(d.currentLoad.currentLoad)
+      const ALoad = Math.round(d.currentLoad.avgLoad)
       //   console.log(d);
       const StatusEmbed = new EmbedBuilder()
         .setColor(0x0099ff)
-        .setTitle("mDesk Status")
-        .setURL("https://cockpit.mdesk.tech")
+        .setTitle('mDesk Status')
+        .setURL('https://cockpit.mdesk.tech')
         .setDescription(
           `Average Load: ${ALoad}\n` +
             `Current Load: ${CLoad}`
         )
         .addFields(
           {
-            name: "CPU",
+            name: 'CPU',
             value:
               `Manufacturer: ${d.cpu.manufacturer}\n` +
               `Brand: ${d.cpu.brand}\n` +
               `Frequency: ${d.cpu.speed}`,
-            inline: true,
+            inline: true
           },
           {
-            name: "Memory",
+            name: 'Memory',
             value:
               `Total: ${d.mem.total}\n` +
               `Used: ${d.mem.used}\n` +
               `Free: ${d.mem.free}\n` +
               `Cached: ${d.mem.cached}`,
-            inline: true,
+            inline: true
           },
-          { name: "\u200B", value: "\u200B" },
+          { name: '\u200B', value: '\u200B' },
           {
-            name: "OS",
+            name: 'OS',
             value:
               `Platform: ${d.osInfo.platform}\n` +
               `Release: ${d.osInfo.release}`,
-            inline: true,
+            inline: true
           },
           {
-            name: "Docker",
+            name: 'Docker',
             value:
               `Containers: ${d.dockerInfo.containers}\n` +
               `Containers Running: ${d.dockerInfo.containersRunning}`,
-            inline: true,
+            inline: true
           }
         )
         .setTimestamp()
         .setFooter({
-          text: "mDesk by mTech",
-        });
+          text: 'mDesk by mTech'
+        })
 
-      interaction.reply({ embeds: [StatusEmbed] });
-    });
-  },
-};
+      interaction.reply({ embeds: [StatusEmbed] })
+    })
+  }
+}
