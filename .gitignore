@@ -1,6 +1,7 @@
 config.json
 node_modules/
 enhanced.sqlite
+funtest.js
 
 # Template from https://github.com/github/gitignore/blob/main/Node.gitignore
 
