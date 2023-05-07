@@ -1,6 +1,7 @@
 {
 	"clientId": "", // Your discord bot client ID
 	"token": "", // Your discord bot token
-    "address": "", // Address of your server, should be 192.168.x.x
+    "address": "192.168.x.x", // Address of your server, should be 192.168.x.x
 	"botUser": "" // Should be a non-sudo user
+	"dockerSock": "/var/run/docker.sock" // Docker socket location
 }

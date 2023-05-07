@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "discord.js": "^14.10.2",
+    "dockerode": "^3.3.5",
     "enhanced.db": "^0.3.4",
     "node-ssh": "^13.1.0",
     "systeminformation": "^5.17.12"
