@@ -69,7 +69,7 @@ module.exports = {
         // console.log(containers);
         const row = new ActionRowBuilder().addComponents(select);
 
-        interaction.reply({ embeds: [dockerEmbed], components: [row], ephemeral: true });
+        interaction.reply({ embeds: [dockerEmbed], components: [row], fetchReply: true });
       }
     });
   },
