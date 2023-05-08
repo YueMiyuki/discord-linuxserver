@@ -59,7 +59,7 @@ module.exports = {
           .addOptions(options)
 
         const dockerEmbed = new EmbedBuilder()
-          .setColor(0x0099ff)
+          .setColor('Random')
           .setTitle('Docker')
           .setDescription('Select a conainer and input')
           .setTimestamp()

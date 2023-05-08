@@ -33,7 +33,7 @@ module.exports = {
       // console.log(command);
 
       const commandEmbed = new EmbedBuilder()
-        .setColor(0x0099ff)
+      .setColor('Random')
         .setTitle('Run command')
         .setDescription(' ')
         .addFields(
@@ -95,10 +95,8 @@ module.exports = {
             embeds: [],
             components: []
           })
-
-          command = 'su ' + `${config.botUser}` + ' -c ' + `'${command}'`
-
-          await exec(command, async (error, stdout, stderr) => {
+          nonSudoCommand = 'su ' + `${config.botUser}` + ' -c ' + `'${command}'`
+          await exec(nonSudoCommand, async (error, stdout, stderr) => {
             if (error) {
               await confirmation.followUp({
                 content: 'Command result:' + '```' + `${error.message}` + '```',

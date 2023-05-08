@@ -30,7 +30,7 @@ module.exports = {
       const ALoad = Math.round(d.currentLoad.avgLoad)
       //   console.log(d);
       const StatusEmbed = new EmbedBuilder()
-        .setColor(0x0099ff)
+        .setColor('Random')
         .setTitle('mDesk Status')
         .setURL('https://cockpit.mdesk.tech')
         .setDescription(
