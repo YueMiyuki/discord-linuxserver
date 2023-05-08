@@ -39,11 +39,17 @@ module.exports = {
           `Container Hash: ${containerHash}`
       )
       .addFields(
-        { name: "Container image", value: containerImage, inline: true },
-        { name: "Container command", value: containerCommand, inline: true },
+        { name: "Container image", value: `${containerImage}`, inline: true },
+        {
+          name: "Container command",
+          value: `${containerCommand}`,
+          inline: true,
+        },
         { name: "\u200B", value: "\u200B" },
-        { name: "Container status", value: containerStatus, inline: true }
-      );
+        { name: "Container status", value: `${containerStatus}`, inline: true }
+      )
+      .setTimestamp()
+      .setFooter({ text: "mDesk by mTech" });
 
     console.log(dockerResult);
     console.log(Object.keys(dockerResult.ports));
