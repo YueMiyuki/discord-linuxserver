@@ -5,16 +5,24 @@ const config = require("../config.json");
 const Docker = require("dockerode");
 const docker = new Docker({ socketPath: config.dockerSock });
 
+const si = require("systeminformation");
+
 module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
+    await interaction.deferReply({ message: "123", fetchReply: true });
+    const dockerArray = await si.dockerAll();
     if (!interaction.isStringSelectMenu()) return;
     if (interaction.customId !== "containerSelection") return;
 
     const container = interaction.values[0];
-    const selectedContainer = docker.getContainer(container);
-    
 
+    const dockerResult = dockerArray.find((element) =>
+      element.id.startsWith(container)
+    );
 
+    console.log(dockerResult);
+
+    await interaction.followUp("Yeah just work");
   },
 };
