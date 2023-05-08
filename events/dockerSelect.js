@@ -10,11 +10,14 @@ const si = require("systeminformation");
 module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
-    await interaction.deferReply({ message: "Please wait...", fetchReply: true });
     const dockerArray = await si.dockerAll();
     if (!interaction.isStringSelectMenu()) return;
     if (interaction.customId !== "containerSelection") return;
 
+    await interaction.deferReply({
+      message: "Please wait...",
+      fetchReply: true,
+    });
     const container = interaction.values[0];
 
     const dockerResult = dockerArray.find((element) =>
