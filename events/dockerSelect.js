@@ -13,6 +13,8 @@ module.exports = {
 
     const container = interaction.values[0];
     const selectedContainer = docker.getContainer(container);
-    console.log(selectedContainer);
+    
+
+
   },
 };
