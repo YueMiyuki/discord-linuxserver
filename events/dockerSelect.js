@@ -1,5 +1,5 @@
 // Docker command handler
-const { Events } = require("discord.js");
+const { Events, EmbedBuilder } = require("discord.js");
 const config = require("../config.json");
 
 const Docker = require("dockerode");
@@ -30,9 +30,27 @@ module.exports = {
     const containerCommand = dockerResult.command;
     const containerStatus = dockerResult.status;
 
-    console.log(dockerResult);
-    console.log(Object.keys(dockerResult.ports).length)
+    const dockerStatuseEmbed = new EmbedBuilder()
+      .setColor("RANDOM")
+      .setTitle("Docker container status")
+      .setDescription(
+        `Container Name: ${containerName}` +
+          "\n" +
+          `Container Hash: ${containerHash}`
+      )
+      .addFields(
+        { name: "Container image", value: containerImage, inline: true },
+        { name: "Container command", value: containerCommand, inline: true },
+        { name: "\u200B", value: "\u200B" },
+        { name: "Container status", value: containerStatus, inline: true }
+      );
 
-    await interaction.editReply("Yeah just work");
+    console.log(dockerResult);
+    console.log(Object.keys(dockerResult.ports));
+
+    await interaction.editReply({
+      message: "Yeah just work",
+      embeds: [dockerStatuseEmbed],
+    });
   },
 };
