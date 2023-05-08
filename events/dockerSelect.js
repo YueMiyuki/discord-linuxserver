@@ -58,7 +58,7 @@ module.exports = {
       case "running":
       case "restarting":
         // Stop button
-        console.log('stopped')
+        console.log("stopped");
         const stop = new ButtonBuilder()
           .setCustomId("stop")
           .setLabel("Stop")
@@ -71,27 +71,61 @@ module.exports = {
           .setCustomId("pause")
           .setLabel("Pause")
           .setStyle(ButtonStyle.Primary);
+        const row = new ActionRowBuilder().addComponents(stop, restart, pause);
+        await interaction.editReply({
+          embeds: [dockerStatuseEmbed],
+          components: [row],
+        });
+        break;
 
       case "exited":
       case "dead":
       case "created":
-        console.log('edc')
+        console.log("edc");
         // Start button
         const start = new ButtonBuilder()
           .setCustomId("start")
           .setLabel("Start")
           .setStyle(ButtonStyle.Success);
+        const edcRow = new ActionRowBuilder().addComponents(start);
+        await interaction.editReply({
+          embeds: [dockerStatuseEmbed],
+          components: [edcRow],
+        });
+        break;
 
       case "paused":
         // Resume button
-        console.log('p')
-        const resume = new ButtonBuilder()
+        console.log("p");
+        const pausedResume = new ButtonBuilder()
           .setCustomId("resume")
           .setLabel("Resume")
           .setStyle(ButtonStyle.Success);
+        const pRow = new ActionRowBuilder().addComponents(pausedResume);
+        await interaction.editReply({
+          embeds: [dockerStatuseEmbed],
+          components: [pRow],
+        });
+        break;
 
       case "restarting":
-      //idk why its restarting but
+        const restartingStop = new ButtonBuilder()
+          .setCustomId("stop")
+          .setLabel("Stop")
+          .setStyle(ButtonStyle.Danger);
+        const restartingRestart = new ButtonBuilder()
+          .setCustomId("restart")
+          .setLabel("Restart")
+          .setStyle(ButtonStyle.Primary);
+        const rRow = new ActionRowBuilder().addComponents(
+          restartingStop,
+          restartingRestart
+        );
+        await interaction.editReply({
+          embeds: [dockerStatuseEmbed],
+          components: [rRow],
+        });
+        break;
     }
   },
 };
