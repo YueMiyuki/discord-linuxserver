@@ -55,7 +55,6 @@ module.exports = {
     console.log(Object.keys(dockerResult.ports));
 
     await interaction.editReply({
-      message: "Yeah just work",
       embeds: [dockerStatuseEmbed],
     });
   },
