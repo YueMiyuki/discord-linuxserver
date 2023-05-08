@@ -39,12 +39,13 @@ module.exports = {
       )
       .addFields(
         { name: "Container image", value: `${containerImage}`, inline: true },
+        { name: "\u200B", value: "" },
         {
           name: "Container command",
           value: `${containerCommand}`,
           inline: true,
         },
-        { name: "\u200B", value: "\u200B" },
+        { name: "\u200B", value: "" },
         { name: "Container status", value: `${containerStatus}`, inline: true }
       )
       .setTimestamp()
