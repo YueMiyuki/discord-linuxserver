@@ -50,9 +50,9 @@ module.exports = {
           return optionData;
         });
 
-        options = options.slice(0, 23);
+        // options = options.slice(0, 23);
         
-        console.log(options);
+        // console.log(options);
 
         const select = new StringSelectMenuBuilder()
           .setCustomId("containerSelection")
