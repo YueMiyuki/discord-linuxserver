@@ -28,7 +28,7 @@ module.exports = {
     const containerName = dockerResult.name;
     const containerImage = dockerResult.image;
     const containerCommand = dockerResult.command;
-    const containerStatus = dockerResult.status;
+    const containerStatus = dockerResult.state;
 
     const dockerStatuseEmbed = new EmbedBuilder()
       .setTitle("Docker container status")
@@ -49,9 +49,6 @@ module.exports = {
       )
       .setTimestamp()
       .setFooter({ text: "mDesk by mTech" });
-
-    console.log(dockerResult);
-    console.log(Object.keys(dockerResult.ports));
 
     await interaction.editReply({
       embeds: [dockerStatuseEmbed],
