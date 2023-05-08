@@ -14,7 +14,9 @@ module.exports = {
 
   async execute (interaction) {
     const userid = interaction.member.id
-    if (!userLogin.get(userid)) { return interaction.reply('You are not logged in!') }
+    if (!userLogin.get(userid)) {
+      return interaction.reply('You are not logged in!')
+    }
 
     const modal = new ModalBuilder()
       .setCustomId('commandInput')
