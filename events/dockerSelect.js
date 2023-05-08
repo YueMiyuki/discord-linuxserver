@@ -31,7 +31,6 @@ module.exports = {
     const containerStatus = dockerResult.status;
 
     const dockerStatuseEmbed = new EmbedBuilder()
-      .setColor("RANDOM")
       .setTitle("Docker container status")
       .setDescription(
         `Container Name: ${containerName}` +
