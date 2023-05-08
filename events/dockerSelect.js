@@ -38,11 +38,10 @@ module.exports = {
           `Container Hash: ${containerHash}`
       )
       .addFields(
-        { name: "Container image", value: `${containerImage}` },
+        { name: "Container image", value: `${containerImage}` + "⠀⠀⠀" },
         {
           name: "Container command",
           value: `${containerCommand}`,
-          inline: true,
         },
         { name: "Container status", value: `${containerStatus}`, inline: true }
       )
