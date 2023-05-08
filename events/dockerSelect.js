@@ -24,7 +24,14 @@ module.exports = {
       element.id.startsWith(container)
     );
 
+    const containerHash = dockerResult.id.substring(0, 12);
+    const containerName = dockerResult.name;
+    const containerImage = dockerResult.image;
+    const containerCommand = dockerResult.command;
+    const containerStatus = dockerResult.status;
+
     console.log(dockerResult);
+    console.log(Object.keys(dockerResult.ports).length)
 
     await interaction.editReply("Yeah just work");
   },
