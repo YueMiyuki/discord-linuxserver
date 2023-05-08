@@ -9,13 +9,12 @@ const config = require("../../config.json");
 const Docker = require("dockerode");
 const docker = new Docker({ socketPath: config.dockerSock });
 
-const containerList = [];
-
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("docker")
     .setDescription("Docker management"),
   async execute(interaction) {
+    const containerList = [];
     docker.listContainers(async function (err, containers) {
       if (err) {
         console.log(err);
@@ -35,6 +34,7 @@ module.exports = {
           containerList.push(containers);
           // console.log(containers);
         });
+
         // console.log(containerList);
         let options = containerList.map((item) => {
           const [hash, name] = item.split(" Name: ");
@@ -46,13 +46,12 @@ module.exports = {
             description: hashValue,
             value: hashValue,
           };
-          console.log(hashValue)
           return optionData;
         });
 
-        // options = options.slice(0, 23);
-        
-        // console.log(options);
+        options = options.slice(0, 23);
+
+        console.log(options);
 
         const select = new StringSelectMenuBuilder()
           .setCustomId("containerSelection")
