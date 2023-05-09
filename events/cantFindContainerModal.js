@@ -1,4 +1,17 @@
-const { Events, ModalBuilder } = require("discord.js");
+const {
+  Events,
+  EmbedBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ActionRowBuilder,
+} = require("discord.js");
+
+const config = require("../config.json");
+
+const Docker = require("dockerode");
+const docker = new Docker({ socketPath: config.dockerSock });
+
+const si = require("systeminformation");
 
 module.exports = {
   name: Events.InteractionCreate,
