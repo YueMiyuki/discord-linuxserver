@@ -139,7 +139,7 @@ module.exports = {
           await container.stop();
           await confirmation.reply("Container stopped successfully!");
         } catch (e) {
-          await confirmation.reply(
+          await interaction.reply(
             "Failed to stop container!" + "\n" + "Error: " + `${e}`
           );
           console.log(e);
