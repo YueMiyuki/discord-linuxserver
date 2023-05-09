@@ -134,7 +134,7 @@ module.exports = {
       });
       const container = docker.getContainer(containerHash);
       if (confirmation.customId === "runningStop") {
-        const res = container.stop()
+        const res = await container.stop()
         console.log(res)
       } else if (confirmation.customId === "runningRestart") {
       } else if (confirmation.customId === "runningPause") {
