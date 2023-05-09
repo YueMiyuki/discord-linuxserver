@@ -14,7 +14,7 @@ module.exports = {
     .setName('docker')
     .setDescription('Docker management'),
   async execute (interaction) {
-    interaction.deferReply()
+    await interaction.deferReply()
     const containerList = []
     docker.listContainers(async function (err, containers) {
       if (err) {
@@ -70,7 +70,7 @@ module.exports = {
         // console.log(containers);
         const row = new ActionRowBuilder().addComponents(select)
 
-        interaction.editReply({
+        await interaction.update({
           embeds: [dockerEmbed],
           components: [row],
           fetchReply: true
