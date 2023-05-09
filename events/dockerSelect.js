@@ -132,9 +132,9 @@ module.exports = {
         filter: collectorFilter,
         time: 60000,
       });
+      const container = docker.getContainer(containerHash);
       if (confirmation.customId === "runningStop") {
-        console.log(containerHash)
-        
+        console.log(container.stop())
       } else if (confirmation.customId === "runningRestart") {
       } else if (confirmation.customId === "runningPause") {
       }

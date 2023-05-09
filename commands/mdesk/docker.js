@@ -62,7 +62,7 @@ module.exports = {
         const dockerEmbed = new EmbedBuilder()
           .setColor('Random')
           .setTitle('Docker')
-          .setDescription('Select a conainer and input')
+          .setDescription('Select a conainer below')
           .setTimestamp()
           .setFooter({
             text: 'mDesk by mTech'
@@ -71,6 +71,7 @@ module.exports = {
         const row = new ActionRowBuilder().addComponents(select)
 
         await interaction.editReply({
+          content: '',
           embeds: [dockerEmbed],
           components: [row],
           fetchReply: true
