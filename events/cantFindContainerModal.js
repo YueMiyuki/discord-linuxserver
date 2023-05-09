@@ -28,6 +28,9 @@ module.exports = {
         element.id.startsWith(container)
       );
 
+      if (!dockerResult)
+        return await interaction.editReply("We can't find your container");
+
       const originalContainerHash = dockerResult.id;
       const containerHash = originalContainerHash.substring(0, 12);
       const containerName = dockerResult.name;
