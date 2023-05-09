@@ -212,6 +212,7 @@ module.exports = {
         }
       }
     } catch (e) {
+      console.log(e)
       await interaction.editReply({
         content: "Button timeout, removing...",
         components: [],
