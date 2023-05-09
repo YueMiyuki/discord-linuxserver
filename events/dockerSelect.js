@@ -40,7 +40,7 @@ module.exports = {
     let newContainerStatus = containerStatus;
 
     if (newContainerStatus === "exited") {
-      newContainerStatus = "stopped | exited"
+      newContainerStatus = "stopped | exited";
     }
 
     let reply;
@@ -58,7 +58,11 @@ module.exports = {
           name: "Container command",
           value: `${containerCommand}`,
         },
-        { name: "Container status", value: `${newContainerStatus}`, inline: true }
+        {
+          name: "Container status",
+          value: `${newContainerStatus}`,
+          inline: true,
+        }
       )
       .setTimestamp()
       .setFooter({ text: "mDesk by mTech" });
@@ -280,7 +284,10 @@ module.exports = {
         }
       }
     } catch (e) {
-      if (e.name === "Error [INTERACTION_COLLECTOR_ERROR]") {
+      if (
+        e ===
+        "Error [InteractionCollectorError]: Collector received no interactions before ending with reason: time"
+      ) {
         await interaction.editReply({
           content: "Button timeout, removing...",
           components: [],
