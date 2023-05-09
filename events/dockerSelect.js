@@ -37,6 +37,11 @@ module.exports = {
     const containerImage = dockerResult.image;
     const containerCommand = dockerResult.command;
     const containerStatus = dockerResult.state;
+    let newContainerStatus = containerStatus;
+
+    if (newContainerStatus === "exited") {
+      newContainerStatus = "stopped | exited"
+    }
 
     let reply;
     const dockerStatuseEmbed = new EmbedBuilder()
@@ -53,7 +58,7 @@ module.exports = {
           name: "Container command",
           value: `${containerCommand}`,
         },
-        { name: "Container status", value: `${containerStatus}`, inline: true }
+        { name: "Container status", value: `${newContainerStatus}`, inline: true }
       )
       .setTimestamp()
       .setFooter({ text: "mDesk by mTech" });
@@ -136,10 +141,10 @@ module.exports = {
       const container = docker.getContainer(originalContainerHash);
       if (confirmation.customId === "runningStop") {
         try {
-          await container.stop();
           await interaction.editReply({
             components: [],
-          })
+          });
+          await container.stop();
           await confirmation.reply({
             content: "Container stopped successfully!",
             components: [],
@@ -155,6 +160,9 @@ module.exports = {
         }
       } else if (confirmation.customId === "runningRestart") {
         try {
+          await interaction.editReply({
+            components: [],
+          });
           await container.restart();
           await confirmation.reply({
             content: "Container restarted successfully!",
@@ -171,6 +179,9 @@ module.exports = {
         }
       } else if (confirmation.customId === "runningPause") {
         try {
+          await interaction.editReply({
+            components: [],
+          });
           await container.pause();
           await confirmation.reply({
             content: "Container paused successfully!",
@@ -189,6 +200,9 @@ module.exports = {
       // For stopped containers
       else if (confirmation.customId === "stopStart") {
         try {
+          await interaction.editReply({
+            components: [],
+          });
           await container.start();
           await confirmation.reply({
             content: "Container started successfully!",
@@ -207,6 +221,9 @@ module.exports = {
       // For paused containers
       else if (confirmation.customId === "pausedResume") {
         try {
+          await interaction.editReply({
+            components: [],
+          });
           await container.unpause();
           await confirmation.reply({
             content: "Container resumed successfully!",
@@ -225,6 +242,9 @@ module.exports = {
       // For some reason there are restarting containers
       else if (confirmation.customId === "restartingStop") {
         try {
+          await interaction.editReply({
+            components: [],
+          });
           await container.stop();
           await confirmation.reply({
             content: "Container stopped successfully!",
@@ -241,6 +261,9 @@ module.exports = {
         }
       } else if (confirmation.customId === "restartingRestart") {
         try {
+          await interaction.editReply({
+            components: [],
+          });
           await container.restart();
           await confirmation.reply({
             content: "Container restarting successfully!",
