@@ -137,31 +137,49 @@ module.exports = {
       if (confirmation.customId === "runningStop") {
         try {
           await container.stop();
-          await confirmation.reply("Container stopped successfully!");
+          await confirmation.reply({
+            content: "Container stopped successfully!",
+            components: [],
+            embeds: [],
+          });
         } catch (e) {
-          await interaction.reply(
-            "Failed to stop container!" + "\n" + "Error: " + `${e}`
-          );
+          await interaction.editReply({
+            content: "Something went wrong!" + "\n" + "Error: " + `${e}`,
+            components: [],
+            embeds: [],
+          });
           console.log(e);
         }
       } else if (confirmation.customId === "runningRestart") {
         try {
           await container.restart();
-          await confirmation.reply("Container restarted successfully!");
+          await confirmation.reply({
+            content: "Container restarted successfully!",
+            components: [],
+            embeds: [],
+          });
         } catch (e) {
-          await confirmation.reply(
-            "Failed to restart container!" + "\n" + "Error: " + `${e}`
-          );
+          await interaction.editReply({
+            content: "Something went wrong!" + "\n" + "Error: " + `${e}`,
+            components: [],
+            embeds: [],
+          });
           console.log(e);
         }
       } else if (confirmation.customId === "runningPause") {
         try {
           await container.pause();
-          await confirmation.reply("Container paused successfully!");
+          await confirmation.reply({
+            content: "Container paused successfully!",
+            components: [],
+            embeds: [],
+          });
         } catch (e) {
-          await confirmation.reply(
-            "Failed to pause container!" + "\n" + "Error: " + `${e}`
-          );
+          await interaction.editReply({
+            content: "Something went wrong!" + "\n" + "Error: " + `${e}`,
+            components: [],
+            embeds: [],
+          });
           console.log(e);
         }
       }
@@ -169,11 +187,17 @@ module.exports = {
       else if (confirmation.customId === "stopStart") {
         try {
           await container.start();
-          await confirmation.reply("Container started successfully!");
+          await confirmation.reply({
+            content: "Container started successfully!",
+            components: [],
+            embeds: [],
+          });
         } catch (e) {
-          await confirmation.reply(
-            "Failed to start container!" + "\n" + "Error: " + `${e}`
-          );
+          await interaction.editReply({
+            content: "Something went wrong!" + "\n" + "Error: " + `${e}`,
+            components: [],
+            embeds: [],
+          });
           console.log(e);
         }
       }
@@ -181,11 +205,17 @@ module.exports = {
       else if (confirmation.customId === "pausedResume") {
         try {
           await container.unpause();
-          await confirmation.reply("Container resumed successfully!");
+          await confirmation.reply({
+            content: "Container resumed successfully!",
+            components: [],
+            embeds: [],
+          });
         } catch (e) {
-          await confirmation.reply(
-            "Failed to resume container!" + "\n" + "Error: " + `${e}`
-          );
+          await interaction.editReply({
+            content: "Something went wrong!" + "\n" + "Error: " + `${e}`,
+            components: [],
+            embeds: [],
+          });
           console.log(e);
         }
       }
@@ -193,21 +223,33 @@ module.exports = {
       else if (confirmation.customId === "restartingStop") {
         try {
           await container.stop();
-          await confirmation.reply("Container stopped successfully!");
+          await confirmation.reply({
+            content: "Container stopped successfully!",
+            components: [],
+            embeds: [],
+          });
         } catch (e) {
-          await confirmation.reply(
-            "Failed to stop container!" + "\n" + "Error: " + `${e}`
-          );
+          await interaction.editReply({
+            content: "Something went wrong!" + "\n" + "Error: " + `${e}`,
+            components: [],
+            embeds: [],
+          });
           console.log(e);
         }
       } else if (confirmation.customId === "restartingRestart") {
         try {
           await container.restart();
-          await confirmation.reply("Container restarted successfully!");
+          await confirmation.reply({
+            content: "Container restarting successfully!",
+            components: [],
+            embeds: [],
+          });
         } catch (e) {
-          await confirmation.reply(
-            "Failed to restart container!" + "\n" + "Error: " + `${e}`
-          );
+          await interaction.editReply({
+            content: "Something went wrong!" + "\n" + "Error: " + `${e}`,
+            components: [],
+            embeds: [],
+          });
           console.log(e);
         }
       }
@@ -221,6 +263,7 @@ module.exports = {
         interaction.editReply({
           content: "Something went wrong!",
           components: [],
+          embeds: [],
         });
         console.log(e);
       }
