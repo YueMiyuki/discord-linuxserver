@@ -146,12 +146,13 @@ module.exports = {
       })
       const container = docker.getContainer(originalContainerHash)
       if (confirmation.customId === 'runningStop') {
+        confirmation.deferReply('Please wait...')
         try {
           await interaction.editReply({
             components: []
           })
           await container.stop()
-          await confirmation.reply({
+          await confirmation.editReply({
             content: 'Container stopped successfully!',
             components: [],
             embeds: []
@@ -165,12 +166,13 @@ module.exports = {
           console.log(e)
         }
       } else if (confirmation.customId === 'runningRestart') {
+        confirmation.deferReply('Please wait...')
         try {
           await interaction.editReply({
             components: []
           })
           await container.restart()
-          await confirmation.reply({
+          await confirmation.editReply({
             content: 'Container restarted successfully!',
             components: [],
             embeds: []
@@ -184,12 +186,13 @@ module.exports = {
           console.log(e)
         }
       } else if (confirmation.customId === 'runningPause') {
+        confirmation.deferReply('Please wait...')
         try {
           await interaction.editReply({
             components: []
           })
           await container.pause()
-          await confirmation.reply({
+          await confirmation.editReply({
             content: 'Container paused successfully!',
             components: [],
             embeds: []
@@ -203,13 +206,14 @@ module.exports = {
           console.log(e)
         }
       } else if (confirmation.customId === 'stopStart') {
+        confirmation.deferReply('Please wait...')
         // For stopped containers
         try {
           await interaction.editReply({
             components: []
           })
           await container.start()
-          await confirmation.reply({
+          await confirmation.editReply({
             content: 'Container started successfully!',
             components: [],
             embeds: []
@@ -223,13 +227,14 @@ module.exports = {
           console.log(e)
         }
       } else if (confirmation.customId === 'pausedResume') {
+        confirmation.deferReply('Please wait...')
         // For paused containers
         try {
           await interaction.editReply({
             components: []
           })
           await container.unpause()
-          await confirmation.reply({
+          await confirmation.editReply({
             content: 'Container resumed successfully!',
             components: [],
             embeds: []
@@ -243,13 +248,14 @@ module.exports = {
           console.log(e)
         }
       } else if (confirmation.customId === 'restartingStop') {
+        confirmation.deferReply('Please wait...')
         // For some reason there are restarting containers
         try {
           await interaction.editReply({
             components: []
           })
           await container.stop()
-          await confirmation.reply({
+          await confirmation.editReply({
             content: 'Container stopped successfully!',
             components: [],
             embeds: []
@@ -263,12 +269,13 @@ module.exports = {
           console.log(e)
         }
       } else if (confirmation.customId === 'restartingRestart') {
+        confirmation.deferReply('Please wait...')
         try {
           await interaction.editReply({
             components: []
           })
           await container.restart()
-          await confirmation.reply({
+          await confirmation.editReply({
             content: 'Container restarting successfully!',
             components: [],
             embeds: []
