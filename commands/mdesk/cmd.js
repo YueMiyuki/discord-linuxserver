@@ -15,7 +15,7 @@ module.exports = {
   async execute (interaction) {
     const userid = interaction.member.id
     if (!userLogin.get(userid)) {
-      return interaction.reply('You are not logged in!')
+      return await interaction.reply('You are not logged in!')
     }
 
     const modal = new ModalBuilder()

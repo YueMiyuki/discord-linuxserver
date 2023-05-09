@@ -24,7 +24,7 @@ module.exports = {
     .setDescription('Show server status'),
 
   async execute (interaction) {
-    getData().then((d) => {
+    getData().then(async (d) => {
       // console.log(d.currentLoad.currentLoad)
       const CLoad = Math.round(d.currentLoad.currentLoad)
       const ALoad = Math.round(d.currentLoad.avgLoad)
@@ -76,7 +76,7 @@ module.exports = {
           text: 'mDesk by mTech'
         })
 
-      interaction.reply({ embeds: [StatusEmbed] })
+      await interaction.reply({ embeds: [StatusEmbed] })
     })
   }
 }

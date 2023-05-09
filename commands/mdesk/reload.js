@@ -14,18 +14,18 @@ module.exports = {
         .setRequired(true)
     ),
   async execute (interaction) {
-    const userid = interaction.member.id
+    const userid = await interaction.member.id
     if (!userLogin.get(userid)) {
-      return interaction.reply('You are not logged in!')
+      return await interaction.reply('You are not logged in!')
     }
 
-    const commandName = interaction.options
+    const commandName = await interaction.options
       .getString('command', true)
       .toLowerCase()
-    const command = interaction.client.commands.get(commandName)
+    const command = await interaction.client.commands.get(commandName)
 
     if (!command) {
-      return interaction.reply(
+      return await interaction.reply(
         `There is no command with name \`${commandName}\`!`
       )
     }
@@ -35,9 +35,9 @@ module.exports = {
     ]
 
     try {
-      interaction.client.commands.delete(command.data.name)
+      await interaction.client.commands.delete(command.data.name)
       const newCommand = require(`../${command.category}/${command.data.name}.js`)
-      interaction.client.commands.set(newCommand.data.name, newCommand)
+      await interaction.client.commands.set(newCommand.data.name, newCommand)
       await interaction.reply(
         `Command \`${newCommand.data.name}\` was reloaded!`
       )

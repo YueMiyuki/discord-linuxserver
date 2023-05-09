@@ -21,8 +21,8 @@ module.exports = {
     if (!interaction.isModalSubmit()) return
     if (interaction.customId !== 'mdesklogin') return
 
-    const username = interaction.fields.getTextInputValue('username')
-    const pwd = interaction.fields.getTextInputValue('pwd')
+    const username = await interaction.fields.getTextInputValue('username')
+    const pwd = await interaction.fields.getTextInputValue('pwd')
 
     // console.log({ username, pwd });
 
@@ -40,7 +40,7 @@ module.exports = {
       // console.log(logon.connection._protocol._authenticated);
       if (logon.connection._protocol._authenticated) {
         logon.dispose()
-        interaction.followUp({
+        await interaction.followUp({
           content: 'Login success! Welcome back to mdesk!'
         })
 

@@ -15,9 +15,11 @@ module.exports = {
     .setDescription('Login to mDesk'),
 
   async execute (interaction) {
-    const userid = interaction.member.id
+    const userid = await interaction.member.id
 
-    if (userLogin.get(userid)) { return interaction.reply('You are already logged in!') }
+    if (userLogin.get(userid)) {
+      return await interaction.reply('You are already logged in!')
+    }
 
     const modal = new ModalBuilder()
       .setCustomId('mdesklogin')

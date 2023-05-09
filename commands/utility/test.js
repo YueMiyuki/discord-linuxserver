@@ -7,6 +7,6 @@ module.exports = {
     .setName('test')
     .setDescription('A test command so that I know that the bot is working'),
   async execute (interaction) {
-    interaction.reply('Work!')
+    await interaction.reply('Work!')
   }
 }
