@@ -14,6 +14,7 @@ module.exports = {
     .setName('docker')
     .setDescription('Docker management'),
   async execute (interaction) {
+    interaction.deferReply()
     const containerList = []
     docker.listContainers(async function (err, containers) {
       if (err) {

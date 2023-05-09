@@ -134,6 +134,7 @@ module.exports = {
       });
       if (confirmation.customId === "runningStop") {
         console.log(containerHash)
+        
       } else if (confirmation.customId === "runningRestart") {
       } else if (confirmation.customId === "runningPause") {
       }
