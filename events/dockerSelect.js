@@ -6,6 +6,7 @@ const {
   ButtonStyle,
   ActionRowBuilder,
 } = require("discord.js");
+
 const config = require("../config.json");
 
 const Docker = require("dockerode");
@@ -36,6 +37,7 @@ module.exports = {
     const containerCommand = dockerResult.command;
     const containerStatus = dockerResult.state;
 
+    let reply;
     const dockerStatuseEmbed = new EmbedBuilder()
       .setColor("Random")
       .setTitle("Docker container status")
@@ -58,22 +60,20 @@ module.exports = {
     switch (containerStatus) {
       case "running":
       case "restarting":
-        // Stop button
-        console.log("stopped");
         const stop = new ButtonBuilder()
-          .setCustomId("stop")
+          .setCustomId("runningStop")
           .setLabel("Stop")
           .setStyle(ButtonStyle.Danger);
         const restart = new ButtonBuilder()
-          .setCustomId("restart")
+          .setCustomId("runningRestart")
           .setLabel("Restart")
           .setStyle(ButtonStyle.Primary);
         const pause = new ButtonBuilder()
-          .setCustomId("pause")
+          .setCustomId("runningPause")
           .setLabel("Pause")
           .setStyle(ButtonStyle.Primary);
         const row = new ActionRowBuilder().addComponents(stop, restart, pause);
-        await interaction.editReply({
+        reply = await interaction.editReply({
           embeds: [dockerStatuseEmbed],
           components: [row],
         });
@@ -82,28 +82,24 @@ module.exports = {
       case "exited":
       case "dead":
       case "created":
-        console.log("edc");
-        // Start button
         const start = new ButtonBuilder()
-          .setCustomId("start")
+          .setCustomId("stopStart")
           .setLabel("Start")
           .setStyle(ButtonStyle.Success);
         const edcRow = new ActionRowBuilder().addComponents(start);
-        await interaction.editReply({
+        reply = await interaction.editReply({
           embeds: [dockerStatuseEmbed],
           components: [edcRow],
         });
         break;
 
       case "paused":
-        // Resume button
-        console.log("p");
         const pausedResume = new ButtonBuilder()
-          .setCustomId("resume")
+          .setCustomId("pausedResume")
           .setLabel("Resume")
           .setStyle(ButtonStyle.Success);
         const pRow = new ActionRowBuilder().addComponents(pausedResume);
-        await interaction.editReply({
+        reply = await interaction.editReply({
           embeds: [dockerStatuseEmbed],
           components: [pRow],
         });
@@ -111,22 +107,51 @@ module.exports = {
 
       case "restarting":
         const restartingStop = new ButtonBuilder()
-          .setCustomId("stop")
+          .setCustomId("restartingStop")
           .setLabel("Stop")
           .setStyle(ButtonStyle.Danger);
         const restartingRestart = new ButtonBuilder()
-          .setCustomId("restart")
+          .setCustomId("restartingRestart")
           .setLabel("Restart")
           .setStyle(ButtonStyle.Primary);
         const rRow = new ActionRowBuilder().addComponents(
           restartingStop,
           restartingRestart
         );
-        await interaction.editReply({
+        reply = await interaction.editReply({
           embeds: [dockerStatuseEmbed],
           components: [rRow],
         });
         break;
+    }
+
+    const collectorFilter = (i) => i.user.id === interaction.user.id;
+
+    try {
+      const confirmation = await reply.awaitMessageComponent({
+        filter: collectorFilter,
+        time: 60000,
+      });
+      if (confirmation.customId === "runningStop") {
+        console.log(containerHash)
+      } else if (confirmation.customId === "runningRestart") {
+      } else if (confirmation.customId === "runningPause") {
+      }
+      // For stopped containers
+      else if (confirmation.customId === "stopStart") {
+      }
+      // For paused containers
+      else if (confirmation.customId === "pausedResume") {
+      }
+      // For some reason there are restarting containers
+      else if (confirmation.customId === "restartingStop") {
+      } else if (confirmation.customId === "restartingRestart") {
+      }
+    } catch (e) {
+      await interaction.editReply({
+        content: "Button timeout, removing...",
+        components: [],
+      });
     }
   },
 };
