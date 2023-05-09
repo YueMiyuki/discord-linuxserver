@@ -137,9 +137,9 @@ module.exports = {
       if (confirmation.customId === "runningStop") {
         try {
           await container.stop();
-          await interaction.reply("Container stopped successfully!");
+          await confirmation.reply("Container stopped successfully!");
         } catch (e) {
-          await interaction.reply(
+          await confirmation.reply(
             "Failed to stop container!" + "\n" + "Error: " + `${e}`
           );
           console.log(e);
@@ -147,9 +147,9 @@ module.exports = {
       } else if (confirmation.customId === "runningRestart") {
         try {
           await container.restart();
-          await interaction.reply("Container restarted successfully!");
+          await confirmation.reply("Container restarted successfully!");
         } catch (e) {
-          await interaction.reply(
+          await confirmation.reply(
             "Failed to restart container!" + "\n" + "Error: " + `${e}`
           );
           console.log(e);
@@ -157,9 +157,9 @@ module.exports = {
       } else if (confirmation.customId === "runningPause") {
         try {
           await container.pause();
-          await interaction.reply("Container paused successfully!");
+          await confirmation.reply("Container paused successfully!");
         } catch (e) {
-          await interaction.reply(
+          await confirmation.reply(
             "Failed to pause container!" + "\n" + "Error: " + `${e}`
           );
           console.log(e);
@@ -169,9 +169,9 @@ module.exports = {
       else if (confirmation.customId === "stopStart") {
         try {
           await container.start();
-          await interaction.reply("Container started successfully!");
+          await confirmation.reply("Container started successfully!");
         } catch (e) {
-          await interaction.reply(
+          await confirmation.reply(
             "Failed to start container!" + "\n" + "Error: " + `${e}`
           );
           console.log(e);
@@ -181,9 +181,9 @@ module.exports = {
       else if (confirmation.customId === "pausedResume") {
         try {
           await container.unpause();
-          await interaction.reply("Container resumed successfully!");
+          await confirmation.reply("Container resumed successfully!");
         } catch (e) {
-          await interaction.reply(
+          await confirmation.reply(
             "Failed to resume container!" + "\n" + "Error: " + `${e}`
           );
           console.log(e);
@@ -193,9 +193,9 @@ module.exports = {
       else if (confirmation.customId === "restartingStop") {
         try {
           await container.stop();
-          await interaction.reply("Container stopped successfully!");
+          await confirmation.reply("Container stopped successfully!");
         } catch (e) {
-          await interaction.reply(
+          await confirmation.reply(
             "Failed to stop container!" + "\n" + "Error: " + `${e}`
           );
           console.log(e);
@@ -203,9 +203,9 @@ module.exports = {
       } else if (confirmation.customId === "restartingRestart") {
         try {
           await container.restart();
-          await interaction.reply("Container restarted successfully!");
+          await confirmation.reply("Container restarted successfully!");
         } catch (e) {
-          await interaction.reply(
+          await confirmation.reply(
             "Failed to restart container!" + "\n" + "Error: " + `${e}`
           );
           console.log(e);
@@ -213,7 +213,7 @@ module.exports = {
       }
     } catch (e) {
       console.log(e);
-      await interaction.editReply({
+      await confirmation.editReply({
         content: "Button timeout, removing...",
         components: [],
       });
