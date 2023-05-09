@@ -31,7 +31,8 @@ module.exports = {
       element.id.startsWith(container)
     );
 
-    const containerHash = dockerResult.id.substring(0, 12);
+    const originalContainerHash = dockerResult.id;
+    const containerHash = originalContainerHash.substring(0, 12);
     const containerName = dockerResult.name;
     const containerImage = dockerResult.image;
     const containerCommand = dockerResult.command;
@@ -132,22 +133,83 @@ module.exports = {
         filter: collectorFilter,
         time: 60000,
       });
-      const container = docker.getContainer(containerHash);
+      const container = docker.getContainer(originalContainerHash);
       if (confirmation.customId === "runningStop") {
-        const res = await container.stop()
-        console.log(res)
+        try {
+          await container.stop();
+          await interaction.reply("Container stopped successfully!");
+        } catch (e) {
+          await interaction.reply(
+            "Failed to stop container!" + "\n" + "Error: " + `${e}`
+          );
+          console.log(e);
+        }
       } else if (confirmation.customId === "runningRestart") {
+        try {
+          await container.restart();
+          await interaction.reply("Container restarted successfully!");
+        } catch (e) {
+          await interaction.reply(
+            "Failed to restart container!" + "\n" + "Error: " + `${e}`
+          );
+          console.log(e);
+        }
       } else if (confirmation.customId === "runningPause") {
+        try {
+          await container.pause();
+          await interaction.reply("Container paused successfully!");
+        } catch (e) {
+          await interaction(
+            "Failed to pause container!" + "\n" + "Error: " + `${e}`
+          );
+          console.log(e);
+        }
       }
       // For stopped containers
       else if (confirmation.customId === "stopStart") {
+        try {
+          await container.start();
+          await interaction.reply("Container started successfully!");
+        } catch (e) {
+          await interaction.reply(
+            "Failed to start container!" + "\n" + "Error: " + `${e}`
+          );
+          console.log(e);
+        }
       }
       // For paused containers
       else if (confirmation.customId === "pausedResume") {
+        try {
+          await container.unpause();
+          await interaction.reply("Container resumed successfully!");
+        } catch (e) {
+          await interaction.reply(
+            "Failed to resume container!" + "\n" + "Error: " + `${e}`
+          );
+          console.log(e);
+        }
       }
       // For some reason there are restarting containers
       else if (confirmation.customId === "restartingStop") {
+        try {
+          await container.stop();
+          await interaction.reply("Container stopped successfully!");
+        } catch (e) {
+          await interaction.reply(
+            "Failed to stop container!" + "\n" + "Error: " + `${e}`
+          );
+          console.log(e);
+        }
       } else if (confirmation.customId === "restartingRestart") {
+        try {
+          await container.restart();
+          await interaction.reply("Container restarted successfully!");
+        } catch (e) {
+          await interaction.reply(
+            "Failed to restart container!" + "\n" + "Error: " + `${e}`
+          );
+          console.log(e);
+        }
       }
     } catch (e) {
       await interaction.editReply({
