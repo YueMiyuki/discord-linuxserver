@@ -218,7 +218,7 @@ module.exports = {
           components: [],
         });
       } else {
-        confirmation.editReply({
+        interaction.editReply({
           content: "Something went wrong!",
           components: [],
         });
