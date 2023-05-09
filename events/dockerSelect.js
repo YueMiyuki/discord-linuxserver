@@ -159,7 +159,7 @@ module.exports = {
           await container.pause();
           await interaction.reply("Container paused successfully!");
         } catch (e) {
-          await interaction(
+          await interaction.reply(
             "Failed to pause container!" + "\n" + "Error: " + `${e}`
           );
           console.log(e);
@@ -212,7 +212,7 @@ module.exports = {
         }
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
       await interaction.editReply({
         content: "Button timeout, removing...",
         components: [],
