@@ -212,11 +212,18 @@ module.exports = {
         }
       }
     } catch (e) {
-      console.log(e);
-      await confirmation.editReply({
-        content: "Button timeout, removing...",
-        components: [],
-      });
+      if (e.name === "Error [INTERACTION_COLLECTOR_ERROR]") {
+        await interaction.editReply({
+          content: "Button timeout, removing...",
+          components: [],
+        });
+      } else {
+        confirmation.editReply({
+          content: "Something went wrong!",
+          components: [],
+        });
+        console.log(e);
+      }
     }
   },
 };
