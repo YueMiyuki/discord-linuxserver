@@ -3,6 +3,7 @@ const {
   ModalBuilder,
   TextInputBuilder,
   ActionRowBuilder,
+  TextInputStyle
 } = require("discord.js");
 
 module.exports = {
