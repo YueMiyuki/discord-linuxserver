@@ -25,10 +25,10 @@ module.exports = {
 
   async execute (interaction) {
     getData().then(async (d) => {
-      // console.log(d.currentLoad.currentLoad)
+
       const CLoad = Math.round(d.currentLoad.currentLoad)
       const ALoad = Math.round(d.currentLoad.avgLoad)
-      //   console.log(d);
+
       const StatusEmbed = new EmbedBuilder()
         .setColor('Random')
         .setTitle('mDesk Status')

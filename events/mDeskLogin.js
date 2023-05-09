@@ -24,8 +24,6 @@ module.exports = {
     const username = await interaction.fields.getTextInputValue('username')
     const pwd = await interaction.fields.getTextInputValue('pwd')
 
-    // console.log({ username, pwd });
-
     await interaction.deferReply('Loging in to mDesk... Please wait...')
 
     try {
@@ -36,8 +34,7 @@ module.exports = {
         password: pwd,
         tryKeyboard: true
       })
-      // console.log(logon);
-      // console.log(logon.connection._protocol._authenticated);
+
       if (logon.connection._protocol._authenticated) {
         logon.dispose()
         await interaction.followUp({
@@ -45,9 +42,6 @@ module.exports = {
         })
 
         const userid = interaction.member.id
-
-        // Save user data to database
-
         userLogin.set(userid, true)
       }
     } catch (e) {

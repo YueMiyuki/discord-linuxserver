@@ -30,8 +30,6 @@ module.exports = {
         command = command.replace('sudo', '')
       }
 
-      // console.log(command);
-
       const commandEmbed = new EmbedBuilder()
         .setColor('Random')
         .setTitle('Run command')
@@ -183,8 +181,7 @@ module.exports = {
           password: pwd,
           tryKeyboard: true
         })
-        // console.log(logon);
-        // console.log(logon.connection._protocol._authenticated);
+
         if (logon.connection._protocol._authenticated) {
           logon.dispose()
           await interaction.followUp({
