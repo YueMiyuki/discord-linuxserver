@@ -16,6 +16,7 @@ const si = require("systeminformation");
 module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
+    await interaction.deferReply("Please wait...")
     const dockerArray = await si.dockerAll();
     if (!interaction.isModalSubmit()) return;
     if (interaction.customId === "findContainerHashButton") {
