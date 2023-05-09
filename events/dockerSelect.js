@@ -137,6 +137,9 @@ module.exports = {
       if (confirmation.customId === "runningStop") {
         try {
           await container.stop();
+          await interaction.editReply({
+            components: [],
+          })
           await confirmation.reply({
             content: "Container stopped successfully!",
             components: [],
