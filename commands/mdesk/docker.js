@@ -70,7 +70,7 @@ module.exports = {
         // console.log(containers);
         const row = new ActionRowBuilder().addComponents(select)
 
-        interaction.reply({
+        interaction.editReply({
           embeds: [dockerEmbed],
           components: [row],
           fetchReply: true
