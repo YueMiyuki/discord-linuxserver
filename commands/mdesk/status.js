@@ -25,14 +25,12 @@ module.exports = {
 
   async execute (interaction) {
     getData().then(async (d) => {
-
       const CLoad = Math.round(d.currentLoad.currentLoad)
       const ALoad = Math.round(d.currentLoad.avgLoad)
 
       const StatusEmbed = new EmbedBuilder()
         .setColor('Random')
         .setTitle('mDesk Status')
-        .setURL('https://cockpit.mdesk.tech')
         .setDescription(
           `Average Load: ${ALoad}\n` +
             `Current Load: ${CLoad}`
