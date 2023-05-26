@@ -1,0 +1,12 @@
+name: Lint
+on: [push]
+jobs:
+  StandardJS:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 18.16.0
+      - run: npm install standard
+      - run: npm run lint
