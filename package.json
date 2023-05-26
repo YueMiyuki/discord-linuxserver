@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "lint": "npx standard --fix"
+    "test": "node ci.js"
   },
   "devDependencies": {
     "standard": "^17.0.0"
