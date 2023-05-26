@@ -19,5 +19,5 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }} # Optional
           eslint-args: '--ignore-path=.gitignore --quiet'
-          extensions: 'js,jsx,ts,tsx'
+          extensions: 'js,json'
           annotations: true
