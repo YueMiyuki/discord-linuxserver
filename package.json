@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "lint": "npx standard --fix"
+    "lint": "npx standard --fix",
+    "test": "node ci.js"
   },
   "devDependencies": {
     "eslint": "^8.41.0",
