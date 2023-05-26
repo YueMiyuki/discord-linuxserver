@@ -3,8 +3,6 @@ name: Lint
 on:
   pull_request:
   push:
-    branches:
-      - master
 
 jobs:
   eslint:
@@ -18,5 +16,5 @@ jobs:
       - uses: sibiraj-s/action-eslint@v2
         with:
           github-token: ${{ secrets.GH_TOKEN }} # Optional
-          extensions: 'js,json'
+          extensions: "js,json"
           annotations: true
