@@ -18,6 +18,5 @@ jobs:
       - uses: sibiraj-s/action-eslint@v2
         with:
           github-token: ${{ secrets.GH_TOKEN }} # Optional
-          eslint-args: '--ignore-path=.gitignore --quiet'
           extensions: 'js,json'
           annotations: true
