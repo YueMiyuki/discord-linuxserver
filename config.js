@@ -4,4 +4,4 @@ module.exports = {
   address: process.env.address || "",
   botUser: process.env.botUser || "",
   dockerSock: process.env.dockerSock || "",
-};
+}
