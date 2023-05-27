@@ -1,7 +1,7 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const si = require("systeminformation");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js")
+const si = require("systeminformation")
 
-async function getData() {
+async function getData () {
   try {
     const getObject = {
       cpu: "manufacturer, brand, speed",
@@ -9,12 +9,12 @@ async function getData() {
       mem: "total, free, used, cached",
       dockerInfo: "containers, containersRunning",
       currentLoad: "avgLoad, currentLoad",
-    };
+    }
 
-    const data = await si.get(getObject);
-    return data;
+    const data = await si.get(getObject)
+    return data
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
 }
 
@@ -24,16 +24,16 @@ module.exports = {
     .setDescription("Show server status"),
   category: "mdesk",
 
-  async execute(interaction) {
-    const client = interaction.client;
+  async execute (interaction) {
+    const client = interaction.client
     try {
       await interaction.deferReply({
         content: "Please wait...",
         fetchReply: true,
-      });
+      })
       getData().then(async (d) => {
-        const CLoad = Math.round(d.currentLoad.currentLoad);
-        const ALoad = Math.round(d.currentLoad.avgLoad);
+        const CLoad = Math.round(d.currentLoad.currentLoad)
+        const ALoad = Math.round(d.currentLoad.avgLoad)
 
         const StatusEmbed = new EmbedBuilder()
           .setColor("Random")
@@ -79,18 +79,18 @@ module.exports = {
           .setTimestamp()
           .setFooter({
             text: "mDesk by mTech",
-          });
+          })
 
-        await interaction.editReply({ embeds: [StatusEmbed] });
-      });
+        await interaction.editReply({ embeds: [StatusEmbed] })
+      })
     } catch (e) {
-      client.log(e, "error");
+      client.log(e, "error")
       await interaction.editReply({
         content: "An error occur!",
         embeds: [],
         components: [],
         fetchReply: true,
-      });
+      })
     }
   },
-};
+}
