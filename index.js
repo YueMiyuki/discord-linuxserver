@@ -1,60 +1,61 @@
-const fs = require('node:fs')
-const path = require('node:path')
+const fs = require("node:fs");
+const path = require("node:path");
 
-const { Client, Collection, GatewayIntentBits } = require('discord.js')
-const client = new Client({ intents: [GatewayIntentBits.Guilds] })
+const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.commands = new Collection()
-const foldersPath = path.join(__dirname, 'commands')
-const commandFolders = fs.readdirSync(foldersPath)
+client.commands = new Collection();
+const foldersPath = path.join(__dirname, "commands");
+const commandFolders = fs.readdirSync(foldersPath);
 
 try {
   // Config
-  client.config = require('./config.js')
-  client.log = require('./base/function.js').log
+  client.config = require("./config.js");
+  client.log = require("./base/function.js").log;
 } catch (e) {
-  console.log(e)
+  console.log(e);
 }
 
-client.log('Starting...', 'info')
+client.log("Starting...", "info");
 
 if (client.config.ci === true) {
-  client.log('CI mode is enabled, running statup test only', 'ci')
+  client.log("CI mode is enabled, running statup test only", "ci");
 }
 
 // Load commands
 for (const folder of commandFolders) {
-  const commandsPath = path.join(foldersPath, folder)
+  const commandsPath = path.join(foldersPath, folder);
   const commandFiles = fs
     .readdirSync(commandsPath)
-    .filter((file) => file.endsWith('.js'))
+    .filter((file) => file.endsWith(".js"));
   for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file)
-    const command = require(filePath)
-    if ('data' in command && 'execute' in command) {
-      client.commands.set(command.data.name, command)
+    const filePath = path.join(commandsPath, file);
+    const command = require(filePath);
+    if ("data" in command && "execute" in command) {
+      client.commands.set(command.data.name, command);
     } else {
       client.log(
-        `The command at ${filePath} is missing a required "data" or "execute" property.`, 'warn'
-      )
+        `The command at ${filePath} is missing a required "data" or "execute" property.`,
+        "warn"
+      );
     }
   }
 }
 
 // Handle events
-const eventsPath = path.join(__dirname, 'events')
+const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs
   .readdirSync(eventsPath)
-  .filter((file) => file.endsWith('.js'))
+  .filter((file) => file.endsWith(".js"));
 
 for (const file of eventFiles) {
-  const filePath = path.join(eventsPath, file)
-  const event = require(filePath)
+  const filePath = path.join(eventsPath, file);
+  const event = require(filePath);
   if (event.once) {
-    client.once(event.name, (...args) => event.execute(...args))
+    client.once(event.name, (...args) => event.execute(...args));
   } else {
-    client.on(event.name, (...args) => event.execute(...args))
+    client.on(event.name, (...args) => event.execute(...args));
   }
 }
 
-client.login(client.config.token)
+client.login(client.config.token);
