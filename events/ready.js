@@ -6,7 +6,7 @@ module.exports = {
   execute(client) {
     try {
       client.log(`Ready! Logged in as ${client.user.tag}`, "info");
-      if (process.send.CI === "true") {
+      if (process.env.CI === "true") {
         client.log("Startup test succeed!", "ci");
         client.log("Killing process...", "ci");
         process.exit();
