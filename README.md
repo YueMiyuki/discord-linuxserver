@@ -1,6 +1,6 @@
 # discord-linuxserver
 
-Manage your linux server over discord
+### Manage your linux server over discord
 
 > [![Bot](https://github-readme-stats.vercel.app/api/pin/?username=ItzMiracleOwO&repo=discord-linuxserver&show_icons=true&bg_color=23272A&title_color=FF73F1&text_color=FFC0CB&icon_color=9B84EE&count_private=true&border_color=fAA61A&border_radius=10)](https://github.com/ItzMiracleOwO/discord-linuxserver)  
 > ![CodeFactor](https://img.shields.io/codefactor/grade/github/ItzMiracleOwO/discord-linuxserver/main?color=%23F44A6A&logo=codefactor&style=for-the-badge) ![commit](https://img.shields.io/github/last-commit/ItzMiracleOwO/discord-linuxserver?color=%23181717&logo=GitHub&style=for-the-badge)  
