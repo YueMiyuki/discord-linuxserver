@@ -11,7 +11,7 @@
   "scripts": {
     "start": "node index.js",
     "lint": "npx eslint . --fix -c ./.eslintrc.json",
-    "test": "node ./base/ci.js"
+    "test": "node ./base/ci.js && node index.js"
   },
   "devDependencies": {
     "eslint": "^8.41.0",
