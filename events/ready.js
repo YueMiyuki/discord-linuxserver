@@ -8,6 +8,7 @@ module.exports = {
       client.log(`Ready! Logged in as ${client.user.tag}`, "info");
       if (process.env.CI === "true") {
         client.log("Startup test succeed!", "ci");
+        client.log("Node version: " + process.version, "debug");
         client.log("Killing process...", "ci");
         process.exit();
       }
