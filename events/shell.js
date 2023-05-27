@@ -6,12 +6,12 @@ const {
   ButtonStyle,
   ModalBuilder,
   TextInputBuilder,
-  TextInputStyle,
-} = require("discord.js")
+  TextInputStyle
+} = require('discord.js')
 
-const { exec } = require("child_process")
+const { exec } = require('child_process')
 
-const { NodeSSH } = require("node-ssh")
+const { NodeSSH } = require('node-ssh')
 const ssh = new NodeSSH()
 
 let command
@@ -24,47 +24,47 @@ module.exports = {
     try {
       const config = client.config
       if (!interaction.isModalSubmit()) return
-      if (interaction.customId === "commandInput") {
-        command = await interaction.fields.getTextInputValue("command")
+      if (interaction.customId === 'commandInput') {
+        command = await interaction.fields.getTextInputValue('command')
 
-        if (command.startsWith("sudo")) {
-          command = command.replace("sudo", "")
+        if (command.startsWith('sudo')) {
+          command = command.replace('sudo', '')
         }
 
         const commandEmbed = new EmbedBuilder()
-          .setColor("Random")
-          .setTitle("Run command")
-          .setDescription(" ")
+          .setColor('Random')
+          .setTitle('Run command')
+          .setDescription(' ')
           .addFields(
             {
-              name: "You are running this command:",
-              value: `\`${command}\``,
+              name: 'You are running this command:',
+              value: `\`${command}\``
             },
-            { name: "\u200B", value: " " },
+            { name: '\u200B', value: ' ' },
             {
-              name: "Are you sure?",
-              value: " ",
-              inline: true,
+              name: 'Are you sure?',
+              value: ' ',
+              inline: true
             }
           )
           .setTimestamp()
           .setFooter({
-            text: "mDesk by mTech",
+            text: 'mDesk by mTech'
           })
 
         const confirm = new ButtonBuilder()
-          .setCustomId("CmdConfirm")
-          .setLabel("Run command")
+          .setCustomId('CmdConfirm')
+          .setLabel('Run command')
           .setStyle(ButtonStyle.Primary)
 
         const confirmRoot = new ButtonBuilder()
-          .setCustomId("CmdConfirmRoot")
-          .setLabel("Run as root")
+          .setCustomId('CmdConfirmRoot')
+          .setLabel('Run as root')
           .setStyle(ButtonStyle.Danger)
 
         const cancel = new ButtonBuilder()
-          .setCustomId("CmdCancel")
-          .setLabel("Cancel")
+          .setCustomId('CmdCancel')
+          .setLabel('Cancel')
           .setStyle(ButtonStyle.Secondary)
 
         const row = new ActionRowBuilder().addComponents(
@@ -74,10 +74,10 @@ module.exports = {
         )
 
         const CmdResponse = await interaction.reply({
-          content: " ",
+          content: ' ',
           embeds: [commandEmbed],
           components: [row],
-          fetchReply: true,
+          fetchReply: true
         })
 
         const collectorFilter = (i) => i.user.id === interaction.user.id
@@ -85,62 +85,62 @@ module.exports = {
         try {
           confirmation = await CmdResponse.awaitMessageComponent({
             filter: collectorFilter,
-            time: 60_000,
+            time: 60_000
           })
 
-          if (confirmation.customId === "CmdConfirm") {
+          if (confirmation.customId === 'CmdConfirm') {
             await confirmation.deferReply({
               content: `Running command: \`${command}\``,
               embeds: [],
-              components: [],
+              components: []
             })
             const nonSudoCommand =
-              "su " + `${config.botUser}` + " -c " + `'${command}'`
+              'su ' + `${config.botUser}` + ' -c ' + `'${command}'`
             await exec(nonSudoCommand, async (error, stdout, stderr) => {
               if (error) {
                 await confirmation.followUp({
                   content:
-                    "Command result:" + "```" + `${error.message}` + "```",
+                    'Command result:' + '```' + `${error.message}` + '```',
                   embeds: [],
-                  components: [],
+                  components: []
                 })
               } else if (stderr) {
                 await confirmation.followUp({
-                  content: "Command result:" + "```" + `${stderr}` + "```",
+                  content: 'Command result:' + '```' + `${stderr}` + '```',
                   embeds: [],
-                  components: [],
+                  components: []
                 })
               } else if (stdout) {
                 await confirmation.followUp({
-                  content: "Command result:" + "```" + `${stdout}` + "```",
+                  content: 'Command result:' + '```' + `${stdout}` + '```',
                   embeds: [],
-                  components: [],
+                  components: []
                 })
               }
             })
-          } else if (confirmation.customId === "CmdCancel") {
+          } else if (confirmation.customId === 'CmdCancel') {
             await confirmation.update({
-              content: "Action cancelled",
+              content: 'Action cancelled',
               components: [],
-              embeds: [],
+              embeds: []
             })
-          } else if (confirmation.customId === "CmdConfirmRoot") {
+          } else if (confirmation.customId === 'CmdConfirmRoot') {
             const modal = new ModalBuilder()
-              .setCustomId("cmdRootPwd")
-              .setTitle("Verify your password")
+              .setCustomId('cmdRootPwd')
+              .setTitle('Verify your password')
 
             const cmdUsernameInput = new TextInputBuilder()
               .setRequired(true)
-              .setCustomId("cmdUser")
-              .setLabel("mDesk username:")
-              .setPlaceholder("Username")
+              .setCustomId('cmdUser')
+              .setLabel('mDesk username:')
+              .setPlaceholder('Username')
               .setStyle(TextInputStyle.Short)
 
             const cmdPwdInput = new TextInputBuilder()
               .setRequired(true)
-              .setCustomId("cmdPwd")
-              .setLabel("mDesk password:")
-              .setPlaceholder("Password")
+              .setCustomId('cmdPwd')
+              .setLabel('mDesk password:')
+              .setPlaceholder('Password')
               .setStyle(TextInputStyle.Short)
 
             const firstActionRow = new ActionRowBuilder().addComponents(
@@ -156,22 +156,22 @@ module.exports = {
         } catch (e) {
           if (
             e ===
-            "Error [InteractionCollectorError]: Collector received no interactions before ending with reason: time"
+            'Error [InteractionCollectorError]: Collector received no interactions before ending with reason: time'
           ) {
             await CmdResponse.reply({
-              content: "Response not received within 1 minute, cancelling",
-              components: [],
+              content: 'Response not received within 1 minute, cancelling',
+              components: []
             })
           } else {
             await CmdResponse.reply({
-              content: "An error occur, please try again.",
+              content: 'An error occur, please try again.'
             })
-            client.log(e, "error")
+            client.log(e, 'error')
           }
         }
-      } else if (interaction.customId === "cmdRootPwd") {
-        const username = await interaction.fields.getTextInputValue("cmdUser")
-        const pwd = await interaction.fields.getTextInputValue("cmdPwd")
+      } else if (interaction.customId === 'cmdRootPwd') {
+        const username = await interaction.fields.getTextInputValue('cmdUser')
+        const pwd = await interaction.fields.getTextInputValue('cmdPwd')
 
         await interaction.deferReply()
 
@@ -181,65 +181,65 @@ module.exports = {
             username,
             port: 22,
             password: pwd,
-            tryKeyboard: true,
+            tryKeyboard: true
           })
 
           if (logon.connection._protocol._authenticated) {
             logon.dispose()
             await interaction.followUp({
-              content: "Verification succeed! Running command as root...",
+              content: 'Verification succeed! Running command as root...'
             })
 
-            if (command.startsWith("sudo")) {
-              command = command.replace("sudo", "")
+            if (command.startsWith('sudo')) {
+              command = command.replace('sudo', '')
             }
 
-            command = "sudo " + `${command}`
+            command = 'sudo ' + `${command}`
 
             await exec(command, async (error, stdout, stderr) => {
               if (error) {
                 await confirmation.followUp({
                   content:
-                    "Root command result:" + "```" + `${error.message}` + "```",
+                    'Root command result:' + '```' + `${error.message}` + '```',
                   embeds: [],
-                  components: [],
+                  components: []
                 })
               } else if (stderr) {
                 await confirmation.followUp({
-                  content: "Root command result:" + "```" + `${stderr}` + "```",
+                  content: 'Root command result:' + '```' + `${stderr}` + '```',
                   embeds: [],
-                  components: [],
+                  components: []
                 })
               } else if (stdout) {
                 await confirmation.followUp({
-                  content: "Root command result:" + "```" + `${stdout}` + "```",
+                  content: 'Root command result:' + '```' + `${stdout}` + '```',
                   embeds: [],
-                  components: [],
+                  components: []
                 })
               }
             })
           }
         } catch (e) {
-          if (e === "Error: All configured authentication methods failed") {
+          if (e === 'Error: All configured authentication methods failed') {
             await interaction.followUp({
-              content: "Login failed. Please try again.",
+              content: 'Login failed. Please try again.'
             })
           } else {
             await interaction.followUp({
-              content: "An error occur, please try again.",
+              content: 'An error occur, please try again.'
             })
-            client.log(e, "error")
+            client.log(e, 'error')
           }
         }
       }
     } catch (e) {
-      client.log(e, "error")
+      client.log(e, 'error')
       await interaction.editReply({
-        content: "An error occur!",
+        content: 'An error occur!',
         embeds: [],
         components: [],
-        fetchReply: true,
+        fetchReply: true
       })
     }
-  },
+  }
 }

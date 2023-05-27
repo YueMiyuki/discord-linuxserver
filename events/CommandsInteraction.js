@@ -1,5 +1,5 @@
 // Command Interaction Handler
-const { Events } = require("discord.js")
+const { Events } = require('discord.js')
 
 module.exports = {
   name: Events.InteractionCreate,
@@ -13,7 +13,7 @@ module.exports = {
       if (!command) {
         client.log(
           `No command matching ${interaction.commandName} was found.`,
-          "error"
+          'error'
         )
         return
       }
@@ -24,16 +24,16 @@ module.exports = {
           `Command ${command} ran by ${interaction.user.tag} (${interaction.member.id})`
         )
       } catch (error) {
-        client.log(error, "error")
+        client.log(error, 'error')
       }
     } catch (e) {
-      client.log(e, "error")
+      client.log(e, 'error')
       await interaction.editReply({
-        content: "An error occur!",
+        content: 'An error occur!',
         embeds: [],
         components: [],
-        fetchReply: true,
+        fetchReply: true
       })
     }
-  },
+  }
 }
