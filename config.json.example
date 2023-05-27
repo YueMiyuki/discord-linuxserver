@@ -1,7 +1,8 @@
-{
-	"clientId": "", // Your discord bot client ID
-	"token": "", // Your discord bot token
-    "address": "192.168.x.x", // Address of your server, should be 192.168.x.x
-	"botUser": "" // Should be a non-sudo user
-	"dockerSock": "/var/run/docker.sock" // Docker socket location
-}
+module.exports = {
+  clientId: process.env.clientId || "你的Bot的 Client ID", // 可以從 Discord develoepr portal 獲取
+  token: process.env.token || "機器人Token", // 可以從 Discord develoepr portal 獲取
+  address: process.env.address || "主機的網絡地址", // 可以在主機上使用 `hostname -I | awk '{print $1}'` 命令獲取
+  botUser: process.env.botUser || "機器人主機用戶", // 使用 `adduser` 創建的 **無root權限** 賬號
+  dockerSock: process.env.dockerSock || "Docker socket位置", // 預設為 '/var/run/docker.sock'
+  ci: process.env.CI || false, // 布林值, 一般情況下請設置爲 false
+};

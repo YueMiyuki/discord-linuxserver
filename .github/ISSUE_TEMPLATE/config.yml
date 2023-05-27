@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 🤔 問題
+    url: https://github.com/ItzMiracleOwO/discord-linuxserver/issues
+    about: 你可以開啟Issues, 我們很快就會為您提供支援!
+  - name: 💬 聊天
+    url: https://github.com/ItzMiracleOwO/discord-linuxserver/discussions
+    about: 想要與其他人討論關於機器人的話題嗎? 加入我們的Discussions吧!

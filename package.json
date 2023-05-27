@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "chalk": "4.1.2",
+    "console-stamp": "^3.1.1",
     "discord.js": "^14.10.2",
     "dockerode": "^3.3.5",
     "enhanced.db": "^0.3.4",
@@ -8,8 +10,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "lint": "npx standard --fix",
-    "test": "node ci.js"
+    "lint": "npx eslint . --fix -c ./.eslintrc.json",
+    "test": "node ./base/ci.js"
   },
   "devDependencies": {
     "eslint": "^8.41.0",

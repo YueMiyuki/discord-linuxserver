@@ -1,4 +1,4 @@
-config.json
+config.js
 node_modules/
 enhanced.sqlite
 funtest.js
