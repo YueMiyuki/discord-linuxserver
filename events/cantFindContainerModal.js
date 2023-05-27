@@ -293,7 +293,7 @@ module.exports = {
                 components: [],
                 embeds: [],
               });
-              cilent.log(e, "error");
+              client.log(e, "error");
             }
           }
         } catch (e) {
