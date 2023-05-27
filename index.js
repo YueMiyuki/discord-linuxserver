@@ -8,13 +8,15 @@ client.commands = new Collection();
 const foldersPath = path.join(__dirname, "commands");
 const commandFolders = fs.readdirSync(foldersPath);
 
-try {
-  // Config
-  client.config = require("./config.js");
-  client.log = require("./base/function.js").log;
-} catch (e) {
-  console.log(e);
-}
+(function clientImport() {
+  try {
+    // Config
+    client.config = require("./config.js");
+    client.log = require("./base/function.js").log;
+  } catch (e) {
+    console.log(e);
+  }
+}())
 
 client.log("Starting...", "info");
 
