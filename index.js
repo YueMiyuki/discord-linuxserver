@@ -18,7 +18,7 @@ try {
 
 client.log("Starting...", "info");
 
-if (client.config.ci === true) {
+if (process.env.CI === 'true') {
   client.log("CI mode is enabled, running statup test only", "ci");
 }
 
