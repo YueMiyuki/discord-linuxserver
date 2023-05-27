@@ -1,7 +1,7 @@
 module.exports = {
   log: function (message, type) {
     require("console-stamp")(console, {
-      format: ":date(yyyy/mm/dd HH:MM:ss.l) >",
+      format: ":date(yyyy/mm/dd HH:MM:ss) >",
     });
 
     const chalk = require("chalk");
