@@ -15,8 +15,9 @@ module.exports = {
       if (!userLogin.get(userid)) {
         return await interaction.reply("You are not logged in!");
       }
+      interaction.reply("Killing bot process...");
       client.log(
-        "Kill bot progress requested by" +
+        "Kill bot progress requested by " +
           `${interaction.user.tag} (${interaction.member.id})`,
         "error"
       );
