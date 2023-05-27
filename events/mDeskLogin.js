@@ -1,16 +1,16 @@
 // mDesk Login command handler
-const { Events } = require("discord.js")
+const { Events } = require('discord.js')
 
 // Database
-const db = require("enhanced.db")
+const db = require('enhanced.db')
 const options = {
-  clearOnStart: false,
+  clearOnStart: false
 }
 
 db.options(options)
-const userLogin = new db.Table("user")
+const userLogin = new db.Table('user')
 
-const { NodeSSH } = require("node-ssh")
+const { NodeSSH } = require('node-ssh')
 const ssh = new NodeSSH()
 
 module.exports = {
@@ -21,12 +21,12 @@ module.exports = {
       const config = interaction.client.config
 
       if (!interaction.isModalSubmit()) return
-      if (interaction.customId !== "mdesklogin") return
+      if (interaction.customId !== 'mdesklogin') return
 
-      const username = await interaction.fields.getTextInputValue("username")
-      const pwd = await interaction.fields.getTextInputValue("pwd")
+      const username = await interaction.fields.getTextInputValue('username')
+      const pwd = await interaction.fields.getTextInputValue('pwd')
 
-      await interaction.deferReply("Loging in to mDesk... Please wait...")
+      await interaction.deferReply('Loging in to mDesk... Please wait...')
 
       try {
         const logon = await ssh.connect({
@@ -34,38 +34,38 @@ module.exports = {
           username,
           port: 22,
           password: pwd,
-          tryKeyboard: true,
+          tryKeyboard: true
         })
 
         if (logon.connection._protocol._authenticated) {
           logon.dispose()
           await interaction.followUp({
-            content: "Login success! Welcome back to mdesk!",
+            content: 'Login success! Welcome back to mdesk!'
           })
 
           const userid = interaction.member.id
           userLogin.set(userid, true)
         }
       } catch (e) {
-        if (e === "Error: All configured authentication methods failed") {
+        if (e === 'Error: All configured authentication methods failed') {
           await interaction.followUp({
-            content: "Login failed. Please try again.",
+            content: 'Login failed. Please try again.'
           })
         } else {
           await interaction.followUp({
-            content: "An error occur, please try again.",
+            content: 'An error occur, please try again.'
           })
-          client.log(e, "error")
+          client.log(e, 'error')
         }
       }
     } catch (e) {
-      client.log(e, "error")
+      client.log(e, 'error')
       await interaction.editReply({
-        content: "An error occur!",
+        content: 'An error occur!',
         embeds: [],
         components: [],
-        fetchReply: true,
+        fetchReply: true
       })
     }
-  },
+  }
 }
