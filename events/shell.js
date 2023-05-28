@@ -118,6 +118,12 @@ module.exports = {
                 });
               }
             });
+            client.log(
+              `${interaction.member.tag} (${interaction.user.id}) ` +
+                "ran: " +
+                command,
+              "debug"
+            );
           } else if (confirmation.customId === "CmdCancel") {
             await confirmation.update({
               content: "Action cancelled",
@@ -197,6 +203,12 @@ module.exports = {
             command = "sudo " + `${command}`;
 
             await exec(command, async (error, stdout, stderr) => {
+              client.log(
+                `${confirmation.member.tag} (${confirmation.user.id}) ` +
+                  "ran with root: " +
+                  command,
+                "warn"
+              );
               if (error) {
                 await confirmation.followUp({
                   content:

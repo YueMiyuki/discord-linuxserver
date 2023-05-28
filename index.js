@@ -12,9 +12,10 @@ const commandFolders = fs.readdirSync(foldersPath);
   try {
     // Config
     client.config = require("./config.js");
-    client.log = require("./base/function.js").log;
+    client.log = require("./base/log.js").log;
+    client.ci = require("./base/runCi.js").ci;
   } catch (e) {
-    console.log(e);
+    throw new Error("Failed to import client function!");
   }
 })();
 

@@ -4,14 +4,14 @@ const path = require("node:path");
 
 try {
   // Config
-  this.config = require("../config.js");
-  this.log = require("./function.js").log;
+  config = require("../config.js");
+  log = require("./log.js").log;
 } catch (e) {
   console.log(e);
 }
 
-const clientId = this.config.clientId;
-const token = this.config.token;
+const clientId = config.clientId;
+const token = config.token;
 
 const commands = [];
 // Grab all the command folders from the commands directory you created earlier
@@ -31,7 +31,7 @@ for (const folder of commandFolders) {
     if ("data" in command && "execute" in command) {
       commands.push(command.data.toJSON());
     } else {
-      this.log(
+      log(
         `The command at ${filePath} is missing a required "data" or "execute" property.`,
         "warn"
       );
@@ -45,7 +45,7 @@ const rest = new REST().setToken(token);
 // and deploy your commands!
 (async () => {
   try {
-    this.log(
+    log(
       `Started refreshing ${commands.length} application (/) commands.`,
       "info"
     );
@@ -55,8 +55,8 @@ const rest = new REST().setToken(token);
       body: commands,
     });
 
-    this.log(
-      `Successfully reloaded ${data.length} application (/) commands.`,
+    log(
+      `Successfully reloaded ${data.length} application (/) commands.` + "\n",
       "info"
     );
   } catch (error) {

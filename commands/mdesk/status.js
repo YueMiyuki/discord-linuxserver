@@ -54,10 +54,10 @@ module.exports = {
             {
               name: "Memory",
               value:
-                `Total: ${d.mem.total}\n` +
-                `Used: ${d.mem.used}\n` +
-                `Free: ${d.mem.free}\n` +
-                `Cached: ${d.mem.cached}`,
+                `Total: ${Math.round(d.mem.total / 1024 / 1024 / 1024)}\n` +
+                `Used: ${Math.round(d.mem.used / 1024 / 1024 / 1024)}\n` +
+                `Free: ${Math.round(d.mem.free / 1024 / 1024 / 1024)}\n` +
+                `Cached: ${Math.round(d.mem.cached / 1024 / 1024 / 1024)}`,
               inline: true,
             },
             { name: "\u200B", value: "\u200B" },
@@ -71,8 +71,12 @@ module.exports = {
             {
               name: "Docker",
               value:
-                `Containers: ${d.dockerInfo.containers}\n` +
-                `Containers Running: ${d.dockerInfo.containersRunning}`,
+                `Containers: ${
+                  d.dockerInfo.containers || "Docker not found"
+                }\n` +
+                `Containers Running: ${
+                  d.dockerInfo.containersRunning || "Docker not found"
+                }`,
               inline: true,
             }
           )
