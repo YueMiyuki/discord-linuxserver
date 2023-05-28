@@ -12,7 +12,7 @@
     "start": "node index.js",
     "lint": "npx eslint . --fix -c ./.eslintrc.json",
     "deploy": "node ./base/deploy.js",
-    "test": "node --trace-warnings ./base/runCi.js && node --trace-warnings index.js"
+    "test": "cp ./config.js.example -r ./config.js && node --trace-warnings ./base/runCi.js && node --trace-warnings index.js"
   },
   "devDependencies": {
     "eslint": "^8.41.0",
