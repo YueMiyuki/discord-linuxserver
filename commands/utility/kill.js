@@ -1,8 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const db = require("enhanced.db");
-const userLogin = new db.Table("user");
-
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("kill")
@@ -12,14 +9,18 @@ module.exports = {
     const client = interaction.client;
     try {
       const userid = interaction.member.id;
-      if (!userLogin.get(userid)) {
-        return await interaction.reply("You are not logged in!");
+
+      const auth = await client.dbAuth(userid);
+      if (!auth) {
+        await interaction.reply("You are not authorized to use this command!");
+        return;
       }
+
       interaction.reply("Killing bot process...");
       client.log(
         "Kill bot progress requested by " +
           `${interaction.user.tag} (${interaction.member.id})`,
-        "error"
+        "debug"
       );
       process.exit();
     } catch (e) {

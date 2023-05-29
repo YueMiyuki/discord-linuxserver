@@ -14,6 +14,8 @@ const commandFolders = fs.readdirSync(foldersPath);
     client.config = require("./config.js");
     client.log = require("./base/log.js").log;
     client.ci = require("./base/runCi.js").ci;
+    client.dbAuth = require("./base/dbAuth.js").dbAuth;
+    client.config.address = "127.0.0.1";
   } catch (e) {
     throw new Error("Failed to import client function!");
   }

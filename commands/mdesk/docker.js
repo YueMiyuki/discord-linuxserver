@@ -9,9 +9,6 @@ const {
 
 const Docker = require("dockerode");
 
-const db = require("enhanced.db");
-const userLogin = new db.Table("user");
-
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("docker")
@@ -24,8 +21,11 @@ module.exports = {
       const docker = new Docker({ socketPath: config.dockerSock });
 
       const userid = await interaction.member.id;
-      if (!userLogin.get(userid)) {
-        return await interaction.reply("You are not logged in!");
+
+      const auth = await client.dbAuth(userid);
+      if (!auth) {
+        await interaction.reply("You are not authorized to use this command!");
+        return;
       }
 
       await interaction.reply("Please wait...");

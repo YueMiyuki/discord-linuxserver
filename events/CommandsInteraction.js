@@ -21,7 +21,7 @@ module.exports = {
       try {
         await command.execute(interaction);
         client.log(
-          `Command ${command} ran by ${interaction.user.tag} (${interaction.member.id})`
+          `Command ${interaction.commandName} ran by ${interaction.user.tag} (${interaction.member.id})`
         );
       } catch (error) {
         client.log(error, "error");
