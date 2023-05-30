@@ -1,16 +1,16 @@
-const { Events } = require("discord.js");
+const { Events } = require('discord.js')
 
 module.exports = {
   name: Events.ClientReady,
   once: true,
-  execute(client) {
+  execute (client) {
     try {
-      client.log(`Ready! Logged in as ${client.user.tag}`, "info");
-      if (process.env.CI === "true") {
-        client.ci();
+      client.log(`Ready! Logged in as ${client.user.tag}`, 'info')
+      if (process.env.CI === 'true') {
+        client.ci()
       }
     } catch (e) {
-      client.log(e, "error");
+      client.log(e, 'error')
     }
-  },
-};
+  }
+}
