@@ -6,7 +6,7 @@
     "dockerode": "^3.3.5",
     "enhanced.db": "^0.3.4",
     "node-ssh": "^13.1.0",
-    "systeminformation": "^5.17.14"
+    "systeminformation": "^5.17.16"
   },
   "scripts": {
     "start": "node index.js",
@@ -18,7 +18,7 @@
     "eslint": "^8.41.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-n": "^16.0.0",
     "eslint-plugin-promise": "^6.1.1"
   }
 }
