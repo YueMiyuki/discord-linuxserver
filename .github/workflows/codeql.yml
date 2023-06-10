@@ -39,8 +39,8 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         # Override language selection by uncommenting this and choosing your languages
-        with:
-          languages: javascript
+        # with:
+          # languages: javascript
 
       # Autobuild attempts to build any compiled languages (C/C++, C#, Go, or Java).
       # If this step fails, then you should remove it and run the build manually (see below).
