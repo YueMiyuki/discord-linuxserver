@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "chalk": "4.1.2",
-    "console-stamp": "^3.1.1",
+    "console-stamp": "^3.1.2",
     "discord.js": "^14.10.2",
     "dockerode": "^3.3.5",
     "enhanced.db": "^0.3.4",
