@@ -6,7 +6,7 @@
     "dockerode": "^3.3.5",
     "enhanced.db": "^0.3.4",
     "node-ssh": "^13.1.0",
-    "systeminformation": "^5.18.6"
+    "systeminformation": "^5.21.3"
   },
   "scripts": {
     "start": "node index.js",
