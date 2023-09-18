@@ -2,7 +2,7 @@
 const { Events } = require('discord.js')
 
 // Database
-const db = require('enhanced.db')
+const db = require('enhanced.db-new')
 const options = {
   clearOnStart: false
 }
