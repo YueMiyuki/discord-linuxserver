@@ -6,7 +6,7 @@
    "packageRules":[
       {
          "groupName":"All Dependencies",
-         "groupSlug":"minor-patch",
+         "groupSlug":"all-deps",
          "matchPackagePatterns":[
             "*"
          ],
