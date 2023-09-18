@@ -10,9 +10,44 @@
          "matchPackagePatterns":[
             "*"
          ],
-         "matchUpdateTypes":[
-            "*"
-         ]
+         "matchUpdateTypes":{
+            "description":"Update types to match against (`major`, `minor`, `pin`, `pinDigest`, etc). Valid only within `packageRules` object.",
+            "oneOf":[
+               {
+                  "type":"array",
+                  "items":{
+                     "type":"string",
+                     "enum":[
+                        "major",
+                        "minor",
+                        "patch",
+                        "pin",
+                        "pinDigest",
+                        "digest",
+                        "lockFileMaintenance",
+                        "rollback",
+                        "bump",
+                        "replacement"
+                     ]
+                  }
+               },
+               {
+                  "type":"string",
+                  "enum":[
+                     "major",
+                     "minor",
+                     "patch",
+                     "pin",
+                     "pinDigest",
+                     "digest",
+                     "lockFileMaintenance",
+                     "rollback",
+                     "bump",
+                     "replacement"
+                  ]
+               }
+            ]
+         }
       },
       {
          "packageNames":[
