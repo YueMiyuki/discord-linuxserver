@@ -11,8 +11,7 @@
             "*"
          ],
          "matchUpdateTypes":[
-            "minor",
-            "patch"
+            "*"
          ]
       },
       {
