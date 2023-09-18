@@ -17,12 +17,6 @@
       },
       {
          "packageNames":[
-            "node"
-         ],
-         "enabled":false
-      },
-      {
-         "packageNames":[
             "chalk"
          ],
          "enabled":false
