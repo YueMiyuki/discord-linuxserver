@@ -1,12 +1,19 @@
 {
-   "$schema":"https://docs.renovatebot.com/renovate-schema.json",
-   "extends": ["config:base", "group:all"],
-   "packageRules":[
-      {
-         "packageNames":[
-            "chalk"
-         ],
-         "enabled":false
-      }
-   ]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", "group:all"],
+  "includeForks": true,
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "enabled": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    },
+    {
+      "packageNames": ["chalk"],
+      "enabled": false
+    }
+  ]
 }
