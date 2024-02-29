@@ -11,7 +11,7 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v8
+      - uses: actions/stale@v9
         with:
           stale-issue-message: "這個 Issue 已經被標記爲 '穩定' , 如果五天之内沒有任何留言或其他活動則會關閉 Issue"
           stale-pr-message: "這個 Issue 已經被標記爲 '穩定' , 如果五天之内沒有任何留言或其他活動則會關閉 Issue"
