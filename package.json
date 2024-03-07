@@ -3,7 +3,7 @@
     "chalk": "4.1.2",
     "console-stamp": "^3.1.1",
     "discord.js": "^14.10.2",
-    "dockerode": "^3.3.5",
+    "dockerode": "^4.0.0",
     "enhanced.db-new": "^1.0.2",
     "node-ssh": "^13.1.0",
     "systeminformation": "^5.18.6"
